@@ -38,6 +38,11 @@ class AuthController {
         
     }
     
+    /**
+     * Checks and resets current user's authorization information based on the **authkey** found in request.
+     * 
+     * @return boolean 
+     */
     public function reset(){
         $authkey = Vudu::$request->getVar('authkey');
         if(empty($authkey)) return false;
@@ -51,6 +56,7 @@ class AuthController {
         }
         return true;
     }
+    
     
     public function __get($name) {
         switch($name){
@@ -75,6 +81,12 @@ class AuthController {
         }
     }
     
+    /**
+     * This function is used for creating authorized session and storing application specified information into the session.
+     * 
+     * @param mixed $authid
+     * @return string 
+     */
     public function makeAuth($authid){
         session_start();
         session_regenerate_id(true);
